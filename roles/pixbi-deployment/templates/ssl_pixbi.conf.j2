@@ -1,0 +1,13 @@
+[req]
+distinguished_name=dn
+req_extensions=v3_req
+prompt = no
+[v3_req]
+basicConstraints = critical, CA:FALSE
+keyUsage = critical, Digital Signature
+extendedKeyUsage = TLS Web Server Authentication, TLS Web Client Authentication
+subjectAltName=@alt_names
+[alt_names]
+DNS.1 = "{{ pix_url }}"
+[dn]
+CN = "{{ pix_url }}"

@@ -1,0 +1,14 @@
+#SPDX-License-Identifier: MIT-0
+---
+
+# Подготовка серверов
+# - include_tasks: prepare_servers.yml
+
+# Установка и настройка PostgreSQL
+# - include_tasks: prepare_postgres.yml
+
+# Установка и настройка ClickHouse
+# - include_tasks: prepare_clickhouse.yml
+
+# Генерация самоподписанного SSL-сертификата и настройка проксирования nginx
+- include_tasks: configure_nginx.yml

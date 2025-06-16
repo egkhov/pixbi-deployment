@@ -1,0 +1,6 @@
+.vscode
+.env
+venv
+roles/AlexeySetevoi.clickhouse/
+roles/geerlingguy.postgresql/
+

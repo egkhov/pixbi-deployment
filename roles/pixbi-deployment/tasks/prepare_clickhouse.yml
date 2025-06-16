@@ -1,0 +1,18 @@
+- name: Install and configure ClickHouse using AlexeySetevoi.clickhouse role
+  block:
+    - name: Install ClickHouse
+      include_role:
+        name: AlexeySetevoi.clickhouse
+      vars:
+        clickhouse_listen_host:
+          - "::"
+        clickhouse_users_custom:
+          - name: "{{ clickhouse_username }}"
+            password: "{{ clickhouse_password }}"
+            networks:
+              - "::"
+            profile: "default"
+            quota: "default"
+            comment: "Пользователь для использования в конфиге PixBI"
+  when: not is_clickhouse_installed
+  become: true

@@ -1,0 +1,6 @@
+- name: Install PixBI
+  # become: true
+  hosts: pix_host
+  gather_facts: true
+  roles:
+    - pixbi-deployment
