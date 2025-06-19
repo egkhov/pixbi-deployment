@@ -1,0 +1,59 @@
+- name: Install and configure PixBi
+  block:
+    - name: Create PixBI project folder
+      ansible.builtin.file:
+        path: /var/www/pixbi
+        state: directory
+        mode: "0777"
+
+    - name: Download PixBI archive
+      ansible.builtin.get_url:
+        url: "{{ pix_archive_url }}"
+        dest: "/var/www/pixbi"
+      register: downloaded_archive_path
+
+
+    - name: Unarchive PixBI archive
+      ansible.builtin.unarchive:
+        remote_src: true
+        src: "{{ downloaded_archive_path.dest }}"
+        dest: "/var/www/pixbi"
+    
+    - name: Create additional folders
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: 0777
+      loop:
+        - /var/www/pixbi/Chrome
+        - /var/www/pixbi/PixBILog
+        - /var/www/pixbi/BIuploadedImages
+        - /var/www/pixbi/BITempFolder
+        - /var/www/pixbi/BackgroundProcessArtefacts
+    
+    - name: Create PixBI main configuration file
+      ansible.builtin.template:
+        src: ../templates/appsettings.json.j2
+        dest: "/var/www/pixbi/appsettings.json"
+        mode: "0644"
+    
+    - name: Create PixBI systemd file
+      ansible.builtin.template:
+        src: ../templates/pixbi.service.j2
+        dest: "/etc/systemd/system/pixbi.service"
+    
+    - name: Ensure PixBI service is started and enabled
+      ansible.builtin.service:
+        name: pixbi.service
+        state: started
+        enabled: yes
+
+    - name: Allow incoming HTTPS traffic using iptables
+      ansible.builtin.iptables:
+        chain: INPUT
+        protocol: tcp
+        destination_port: 443
+        ctstate: NEW,ESTABLISHED
+        jump: ACCEPT
+        state: present
+  become: true

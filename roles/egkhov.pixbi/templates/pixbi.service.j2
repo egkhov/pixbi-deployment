@@ -1,0 +1,31 @@
+[Unit]
+
+Description=ASP .NET Web Application
+
+[Service]
+
+#Указываем путь к директории с установленным PIX BI
+
+WorkingDirectory=/var/www/pixbi
+
+ExecStart=/usr/bin/dotnet /var/www/pixbi/pix-bi.dll
+
+Restart=always
+
+RestartSec=10
+
+SyslogIdentifier=pixbi
+
+User=www-data
+
+Environment=ASPNETCORE_ENVIRONMENT=Production
+
+Environment=LANG=ru_RU.UTF-8
+
+Environment=XDG_CONFIG_HOME=/tmp/
+ 
+Environment=XDG_CACHE_HOME=/tmp/
+
+[Install]
+
+WantedBy=multi-user.target

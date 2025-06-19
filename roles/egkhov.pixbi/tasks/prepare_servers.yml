@@ -1,0 +1,47 @@
+# - name: Print all available facts
+#   ansible.builtin.debug:
+#     msg: "{{ ansible_facts }}"
+
+- name: Update package cache
+  ansible.builtin.apt:
+    update_cache: true
+  become: true
+
+- name: Prepare PixBI server
+  block: 
+    - name: Install apt-transport-https
+      ansible.builtin.apt:
+        name: apt-transport-https
+        state: present
+        update_cache: true
+
+    - name: Create pixbi folder
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/pixbi_support_packages"
+        state: directory
+        mode: '0755'
+
+    - name: Download dotnet package
+      ansible.builtin.get_url:
+        url: https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb
+        dest: "{{ ansible_user_dir }}/pixbi_support_packages/packages-microsoft-prod.deb"
+
+    - name: Install dotnet package
+      ansible.builtin.apt:
+        deb: "{{ ansible_user_dir }}/pixbi_support_packages/packages-microsoft-prod.deb"
+        update_cache: true
+
+    - name: Install additional packages
+      ansible.builtin.apt:
+        name:
+          - nginx
+          - dotnet-sdk-7.0
+        state: present
+
+    - name: Ensure nginx is running
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true
+  become: true
+  when: inventory_hostname == 'pix_host'

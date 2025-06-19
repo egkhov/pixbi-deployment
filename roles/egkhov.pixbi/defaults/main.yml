@@ -1,0 +1,17 @@
+# defaults file for pixbi-deployment
+
+pix_archive_url: "{{ lookup('env', 'PIX_ARCHIVE_URL') | default('https://pix.ru/download/bi_linux/latest_stable.zip', true) }}"
+pix_url: "{{ lookup('env', 'PIX_URL') | default('ansible.pix.example.com', true) }}"
+
+is_postgres_installed: "{{ lookup('env', 'IS_POSTGRES_INSTALLED') | default('false', true) | bool }}"
+is_clickhouse_installed: "{{ lookup('env', 'IS_CLICKHOUSE_INSTALLED') | default('false', true) | bool }}"
+
+postgres_host: "{{ lookup('env', 'PG_DB_HOST') | default('localhost', true) }}"
+postgres_port: "{{ lookup('env', 'PG_DB_PORT') | default('5432', true) }}"
+postgres_username: "{{ lookup('env', 'PG_DB_USER') | default('postgres_user_default', true) }}"
+postgres_password: "{{ lookup('env', 'PG_DB_PASSWORD') | default('postgres_password_default', true) }}"
+
+clickhouse_host: "{{ lookup('env', 'CH_DB_HOST') | default('localhost', true) }}"
+clickhouse_port: "{{ lookup('env', 'CH_DB_PORT') | default('8123', true) }}"
+clickhouse_username: "{{ lookup('env', 'CH_DB_USER') | default('clickhouse_user_default', true) }}"
+clickhouse_password: "{{ lookup('env', 'CH_DB_PASSWORD') | default('clickhouse_password_default', true) }}"

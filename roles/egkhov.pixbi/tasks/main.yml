@@ -1,0 +1,22 @@
+#SPDX-License-Identifier: MIT-0
+---
+
+# Подготовка серверов
+- ansible.builtin.include_tasks: prepare_servers.yml
+
+# Установка и настройка PostgreSQL
+- ansible.builtin.include_tasks: prepare_postgres.yml
+  when: "'postgres' in group_names"
+
+# Установка и настройка ClickHouse
+- ansible.builtin.include_tasks: prepare_clickhouse.yml
+  when: "'clickhouse' in group_names"
+
+# Генерация самоподписанного SSL-сертификата и настройка проксирования nginx
+- ansible.builtin.include_tasks: configure_nginx.yml
+  when: "'pix' in group_names"
+
+# Установка и настройка PixBI из архива
+- ansible.builtin.include_tasks: deploy_pixbi.yml
+  when: "'pix' in group_names"
+  

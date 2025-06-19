@@ -1,0 +1,56 @@
+{
+  "Database": {
+    "ConnectionStringsEncrypted": false,
+    "ConnectionStrings": {
+      "PostgreSqlConnection": "User ID={{ postgres_username }};Password={{ postgres_password }};Host={{ postgres_host }};Port={{ postgres_port }};Database={{ pg_config_db_name }};Pooling=true;",
+      "PostgreSqlDataProtectionKeysConnection": "User ID={{ postgres_username }};Password={{ postgres_password }};Host={{ postgres_host }};Port={{ postgres_port }};Database={{ pg_bi_keys_db_name }};Pooling=true;"
+    },
+    "DataWarehouse": {
+      "SchemaName": "PixBiDataSets",
+      "ClickhouseConnection": "Compression=True;CheckCompressedHash=False;Compressor=lz4;Host={{ clickhouse_host }};Port={{ clickhouse_port }};Protocol=http;Username={{ clickhouse_username }};Password={{ clickhouse_password }};UseSession=true;set_cancel_http_readonly_queries_on_client_close=1"
+    },
+    "OdbcIniFilePath": null
+  },
+  "DataSource": {
+    "ClickHouse": {
+      "SchemaSeries": "All"
+    }
+  },
+  "MemoryCache": {
+    "Enabled": true,
+    "AbsoluteExpirationInMinutes": 5
+  },
+  "Encryption": {
+    "TokenKey": "cagw374h-126b-7h67-12c3-6dvegw3241" // заменить на рандомный GUID
+  },
+  "Folders": {
+    "SecurityAuditRecords": "CefLogsDir"
+  },
+  "Utilities": {
+    "UseSwagger": true,
+    "UseHangfireUI": false
+  },
+  "Kerberos": {
+    "KeyTabPath": ""
+  },
+  "Ldap": {
+    "LdapMatchingRuleInChain": false,
+    "LdapSearchSizeLimit": 5000,
+    "IsNotConcurrent": false,
+    "LazyImportDelayedAccess": true,
+    "LazyImportExcludeGroups": true
+  },
+  "Hangfire": {
+    "RefreshAccessRelationships": {
+      "IsEnabled": true
+    }
+  },
+  "Puppeteer": {
+    "LaunchOptions": {
+      "Flags": {
+        "IgnoreCertificateErrorsSpkiListValue": "o63FJ4+2325dBRGrtvjWX6paC2Q2Uxy0HJp3j6dN8lk=" //SPKI finger print example
+        //"IsIgnoreCertificateErrors": true
+      }
+    }
+  }
+}

@@ -1,24 +1,32 @@
+---
 all:
-  hosts:
-    pix_host:
-      ansible_host: "{{ lookup('env', 'PIX_SERVER_HOST') }}"
-      ansible_port: "{{ lookup('env', 'PIX_SERVER_PORT') }}"
-      ansible_user: "{{ lookup('env', 'PIX_SERVER_USER') }}"
-      ansible_password: "{{ lookup('env', 'PIX_SERVER_PASSWORD') }}"
-      ansible_become_password: "{{ lookup('env', 'PIX_SERVER_PASSWORD') }}"
-      # ansible_ssh_private_key_file: "{{ lookup('env', 'PIX_PRIVATE_KEY_PATH) }}"
+  children:
+    pix:
+      hosts:
+        pix_host:
+          ansible_host: "{{ lookup('env', 'PIX_SERVER_HOST') }}"
+          ansible_port: "{{ lookup('env', 'PIX_SERVER_PORT') }}"
+          ansible_user: "{{ lookup('env', 'PIX_SERVER_USER') }}"
+          ansible_password: "{{ lookup('env', 'PIX_SERVER_PASSWORD') }}"
+          ansible_become_password: "{{ lookup('env', 'PIX_SERVER_PASSWORD') }}"
+          # ansible_ssh_private_key_file: "{{ lookup('env', 'PIX_PRIVATE_KEY_PATH') }}"
 
-    postgres_servers:
-      ansible_host: "{{ lookup('env', 'PG_SERVER_HOST') }}"
-      ansible_port: "{{ lookup('env', 'PG_SERVER_PORT') }}"
-      ansible_user: "{{ lookup('env', 'PG_SERVER_USER') }}"
-      ansible_password: "{{ lookup('env', 'PG_SERVER_PASSWORD') }}"
-      # ansible_ssh_private_key_file: "{{ lookup('env', 'PG_PRIVATE_KEY_PATH) }}"
+    postgres:
+      hosts:
+        postgres_server:
+          ansible_host: "{{ lookup('env', 'PG_SERVER_HOST') }}"
+          ansible_port: "{{ lookup('env', 'PG_SERVER_PORT') }}"
+          ansible_user: "{{ lookup('env', 'PG_SERVER_USER') }}"
+          ansible_password: "{{ lookup('env', 'PG_SERVER_PASSWORD') }}"
+          ansible_become_password: "{{ lookup('env', 'PIX_SERVER_PASSWORD') }}"
+          # ansible_ssh_private_key_file: "{{ lookup('env', 'PG_PRIVATE_KEY_PATH') }}"
 
-    clickhouse_servers:
-      ansible_host: "{{ lookup('env', 'CH_SERVER_HOST') }}"
-      ansible_port: "{{ lookup('env', 'CH_SERVER_PORT') }}"
-      ansible_user: "{{ lookup('env', 'CH_SERVER_USER') }}"
-      ansible_password: "{{ lookup('env', 'CH_SERVER_PASSWORD') }}"
-      # ansible_ssh_private_key_file: "{{ lookup('env', 'CH_PRIVATE_KEY_PATH) }}"
-
+    clickhouse:
+      hosts:
+        clickhouse_server:
+          ansible_host: "{{ lookup('env', 'CH_SERVER_HOST') }}"
+          ansible_port: "{{ lookup('env', 'CH_SERVER_PORT') }}"
+          ansible_user: "{{ lookup('env', 'CH_SERVER_USER') }}"
+          ansible_password: "{{ lookup('env', 'CH_SERVER_PASSWORD') }}"
+          ansible_become_password: "{{ lookup('env', 'CH_SERVER_PASSWORD') }}"
+          # ansible_ssh_private_key_file: "{{ lookup('env', 'CH_PRIVATE_KEY_PATH') }}"

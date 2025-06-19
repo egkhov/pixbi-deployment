@@ -1,0 +1,11 @@
+galaxy_info:
+  author: egkhov
+  description: Role for PixBI deployment
+  company: Qlever
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - jammy
+
+  dependencies: []

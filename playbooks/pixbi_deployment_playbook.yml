@@ -1,6 +1,5 @@
 - name: Install PixBI
-  # become: true
-  hosts: pix_host
+  hosts: all
   gather_facts: true
   roles:
-    - pixbi-deployment
+    - egkhov.pixbi

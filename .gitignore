@@ -3,4 +3,11 @@
 venv
 roles/AlexeySetevoi.clickhouse/
 roles/geerlingguy.postgresql/
+*.retry
+*.log
+*.swp
+*.bak
+.vault_pass.txt # Если вы используете временный файл для пароля Vault
+
+.ansible/cp/
 

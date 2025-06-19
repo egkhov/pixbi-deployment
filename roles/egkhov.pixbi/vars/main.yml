@@ -1,0 +1,4 @@
+#SPDX-License-Identifier: MIT-0
+---
+pg_config_db_name: "pix_bi_config_default"
+pg_bi_keys_db_name: "pix_bi_keys_default"

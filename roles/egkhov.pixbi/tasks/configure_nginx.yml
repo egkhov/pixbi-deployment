@@ -30,7 +30,7 @@
   become: true
 - name: Create nginx.conf file for PixBI
   ansible.builtin.template:
-    src: "../templates/pixbi.conf.j2"
+    src: "../templates/pixbi_nginx.conf.j2"
     dest: "/etc/nginx/nginx.conf"
     mode: '0644'
   become: true
