@@ -36,6 +36,7 @@
         name:
           - nginx
           - dotnet-sdk-7.0
+          - unzip
         state: present
 
     - name: Ensure nginx is running

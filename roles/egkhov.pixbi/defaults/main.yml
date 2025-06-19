@@ -1,7 +1,7 @@
 # defaults file for pixbi-deployment
 
-pix_archive_url: "{{ lookup('env', 'PIX_ARCHIVE_URL') | default('https://pix.ru/download/bi_linux/latest_stable.zip', true) }}"
-pix_url: "{{ lookup('env', 'PIX_URL') | default('ansible.pix.example.com', true) }}"
+pix_archive_url: "{{ lookup('env', 'PIX_ARCHIVE_URL') | default('https://pix.ru/download/bi_linux', true) }}"
+pix_url: "{{ lookup('env', 'PIX_URL') | default('pix.company.local', true) }}"
 
 is_postgres_installed: "{{ lookup('env', 'IS_POSTGRES_INSTALLED') | default('false', true) | bool }}"
 is_clickhouse_installed: "{{ lookup('env', 'IS_CLICKHOUSE_INSTALLED') | default('false', true) | bool }}"
